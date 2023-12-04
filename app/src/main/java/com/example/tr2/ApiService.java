@@ -1,6 +1,5 @@
 package com.example.tr2;
 
-import com.example.tr2.Questions.Question;
 import com.example.tr2.Questions.QuestionsResponse;
 
 import java.util.List;
@@ -14,5 +13,5 @@ public interface ApiService {
     Call<String> validateLogin(@Query("user") String user, @Query("password") String password);
 
     @GET("/api/getQuestions")
-    Call<List<Question>> getQuestions();
+    Call<QuestionsResponse> getQuestions();
 }
