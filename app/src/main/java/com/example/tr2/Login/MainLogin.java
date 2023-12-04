@@ -1,13 +1,16 @@
 package com.example.tr2.Login;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.example.tr2.ApiService;
 import com.example.tr2.MainActivity;
@@ -30,6 +33,20 @@ public class MainLogin extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         User = findViewById(R.id.UserText);
         Password = findViewById(R.id.PasswordText);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Math");
+
+            // Obtén el color desde resources
+            int colorId = ContextCompat.getColor(this, R.color.casinavy);
+
+            // Crea un ColorDrawable con el color obtenido
+            ColorDrawable colorDrawable = new ColorDrawable(colorId);
+
+            // Establece el ColorDrawable como fondo de la ActionBar
+            actionBar.setBackgroundDrawable(colorDrawable);
+        }
 
         Button login_btn = findViewById(R.id.LoginBtn);
         login_btn.setOnClickListener(v -> {

@@ -3,9 +3,6 @@ package com.example.tr2.Questions;
 import com.google.gson.annotations.SerializedName;
 import java.util.List;
 
-import com.google.gson.annotations.SerializedName;
-import java.util.List;
-
 public class QuestionsResponse {
     @SerializedName("preguntes")
     private List<Question> questions;

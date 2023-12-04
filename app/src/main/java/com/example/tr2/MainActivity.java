@@ -1,10 +1,15 @@
 package com.example.tr2;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,6 +29,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle("Math");
+
+            int colorId = ContextCompat.getColor(this, R.color.casinavy);
+
+            ColorDrawable colorDrawable = new ColorDrawable(colorId);
+
+            actionBar.setBackgroundDrawable(colorDrawable);
+        }
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("http://192.168.205.83:3000/") // Reemplaza con la dirección y puerto correctos
                 .addConverterFactory(GsonConverterFactory.create())
@@ -34,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         Call<QuestionsResponse> call = apiService.getQuestions();
         call.enqueue(new Callback<QuestionsResponse>() {
             @Override
-            public void onResponse(Call<QuestionsResponse> call, Response<QuestionsResponse> response) {
+            public void onResponse(@NonNull Call<QuestionsResponse> call, @NonNull Response<QuestionsResponse> response) {
                 if (response.isSuccessful()) {
                     QuestionsResponse questionsResponse = response.body();
                     if (questionsResponse != null) {
@@ -46,9 +62,24 @@ public class MainActivity extends AppCompatActivity {
                         recyclerView.setLayoutManager(new LinearLayoutManager(MainActivity.this));
                         QuestionsAdapter questionsAdapter = new QuestionsAdapter(questionsResponse.getQuestions());
                         recyclerView.setAdapter(questionsAdapter);
+                        questionsAdapter.setOnItemClickListener(new QuestionsAdapter.OnItemClickListener() {
+                            @Override
+                            public void onEditClick(int position) {
+                                // Lógica para manejar el clic en el botón "Editar"
+                                Log.d("MainActivity", "Edit button clicked at position: " + position);
+                            }
+
+                            @Override
+                            public void onDeleteClick(int position) {
+                                // Lógica para manejar el clic en el botón "Eliminar"
+                                Log.d("MainActivity", "Delete button clicked at position: " + position);
+                            }
+                        });
+
                     } else {
                         Log.e("MainActivity", "Response body is null");
                     }
+
                 } else {
                     Log.e("MainActivity", "Unsuccessful response. Code: " + response.code());
                     // Manejo de errores específicos según el código de respuesta
@@ -58,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
 
             @Override
-            public void onFailure(Call<QuestionsResponse> call, Throwable t) {
+            public void onFailure(@NonNull Call<QuestionsResponse> call, @NonNull Throwable t) {
                 // Aquí manejas un fallo en la comunicación
             }
         });
