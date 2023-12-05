@@ -26,6 +26,7 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 public class MainLogin extends AppCompatActivity {
     EditText User, Password;
+    MainActivity MA = new MainActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class MainLogin extends AppCompatActivity {
 
     public void CallLogin(String user, String password) {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("http://192.168.205.83:3000/")
+                .baseUrl(MA.URL)
                 .addConverterFactory(ScalarsConverterFactory.create())
                 .build();
         ApiService apiService = retrofit.create(ApiService.class);
