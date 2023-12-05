@@ -11,7 +11,7 @@
     <EditText
         android:id="@+id/UserText"
         android:layout_width="256dp"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:background="@drawable/rounded_edittext_background"
         android:ems="10"
         android:hint="@string/username"
@@ -29,7 +29,7 @@
     <EditText
         android:id="@+id/PasswordText"
         android:layout_width="256dp"
-        android:layout_height="47dp"
+        android:layout_height="48dp"
         android:background="@drawable/rounded_edittext_background"
         android:ems="10"
         android:hint="@string/password"
@@ -48,14 +48,14 @@
         android:id="@+id/LoginBtn"
         android:layout_width="281dp"
         android:layout_height="47dp"
-        android:backgroundTint="@color/skyblue"
         android:text="Login"
-        android:textColor="@color/casinavy"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.685"
+        android:backgroundTint="@color/skyblue"
+        android:textColor="@color/casinavy"
         app:strokeColor="@color/casinavy"
         app:strokeWidth="1dp" />
 

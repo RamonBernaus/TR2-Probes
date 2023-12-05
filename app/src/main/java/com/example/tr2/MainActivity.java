@@ -24,8 +24,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-    public String URL="192.168.19.168";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(URL)
+                .baseUrl("http://192.168.205.83:3000/") // Reemplaza con la dirección y puerto correctos
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
