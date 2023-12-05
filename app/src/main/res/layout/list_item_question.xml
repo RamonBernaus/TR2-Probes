@@ -1,15 +1,17 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="#e8e9e2">
 
     <TextView
         android:id="@+id/textViewEnunciat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        style="@style/CustomFontStyle"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewRespuestas"
@@ -19,22 +21,40 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/buttonEditar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Editar"
-            android:onClick="onEditClick" />
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="101dp"
+            android:layout_height="match_parent"
+            android:backgroundTint="@color/skyblue"
+            android:onClick="onEditClick"
+            android:text="@string/editar"
+            android:textColor="#006064"
+            app:strokeColor="@color/casinavy"
+            app:strokeWidth="1dp" />
+
+        <Space
+            android:layout_width="88dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/buttonEliminar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Eliminar"
-            android:onClick="onDeleteClick" />
+            android:backgroundTint="#ec0909"
+            android:onClick="onDeleteClick"
+            android:text="@string/eliminar"
+            app:strokeColor="#cf0606"
+            app:strokeWidth="2dp" />
+
+        <Space
+            android:layout_width="88dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
     </LinearLayout>
 
 </LinearLayout>
