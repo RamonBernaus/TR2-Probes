@@ -1,7 +1,6 @@
 package com.example.tr2;
 
-import static com.example.tr2.Questions.QuestionsAdapter.setEditingMode;
-
+import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,8 +23,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    //public String URL = "http://192.168.19.168:3000/";
-    public String URL ="http://192.168.17.165:3000/";
+    public String URL = "http://192.168.17.165:3000/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onEditClick(int position) {
                                 Log.d("MainActivity", "Edit button clicked at position: " + position);
-                                setEditingMode(true);
-                                questionsAdapter.notifyDataSetChanged();
                             }
 
                             @Override
@@ -81,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
 
                 } else {
                     Log.e("MainActivity", "Unsuccessful response. Code: " + response.code());
-
+                    // Manejo de errores específicos según el código de respuesta
                 }
             }
 
@@ -89,10 +85,11 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(@NonNull Call<QuestionsResponse> call, @NonNull Throwable t) {
-                Log.e("Error", "Error en la peticio");
+                // Aquí manejas un fallo en la comunicación
             }
         });
 
     }
 }
+
 
