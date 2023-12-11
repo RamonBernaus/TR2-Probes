@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
@@ -72,9 +73,11 @@ public class MainLogin extends AppCompatActivity {
                     String result = response.body();
                     Log.d("TAG", result);
                     if ("Verificado".equals(result)) {
+                        Toast.makeText(MainLogin.this, "Usuari i Contrasenya Correctes", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(MainLogin.this, MainActivity.class);
                         startActivity(intent);
                     } else {
+                        Toast.makeText(MainLogin.this, "Usuari i Contrasenya Incorrectes", Toast.LENGTH_SHORT).show();
                         Log.e("Noup", "No Verificado");
                     }
                 } else {

@@ -1,17 +1,26 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="16dp"
     android:background="#e8e9e2">
+
 
     <TextView
         android:id="@+id/textViewEnunciat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        style="@style/CustomFontStyle"/>
+        android:visibility="visible"/>
+
+    <EditText
+        android:id="@+id/editTextEnunciat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewRespuestas"
@@ -58,4 +67,5 @@
     </LinearLayout>
 
 </LinearLayout>
+
 

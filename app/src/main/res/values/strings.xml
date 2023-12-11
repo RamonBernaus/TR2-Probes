@@ -5,4 +5,5 @@
     <string name="name">Name</string>
     <string name="editar">Editar</string>
     <string name="eliminar">Eliminar</string>
+    <string name="aceptar">Aceptar</string>
 </resources>

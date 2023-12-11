@@ -1,9 +1,13 @@
 package com.example.tr2.Questions;
 
+import static com.example.tr2.Questions.QuestionsAdapter.*;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,7 +17,7 @@ import com.example.tr2.R;
 
 import java.util.List;
 
-public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.QuestionViewHolder> {
+public class QuestionsAdapter extends RecyclerView.Adapter<QuestionViewHolder> {
 
     private final List<QuestionsResponse.Question> questions;
 
@@ -48,50 +52,63 @@ public class QuestionsAdapter extends RecyclerView.Adapter<QuestionsAdapter.Ques
     private static OnItemClickListener listener;
 
     public void setOnItemClickListener(OnItemClickListener listener) {
-        this.listener = listener;
+        QuestionsAdapter.listener = listener;
     }
+
+    private static boolean isEditing = false;
+
+    public static void setEditingMode(boolean editing) {
+        isEditing = editing;
+    }
+
 
     public static class QuestionViewHolder extends RecyclerView.ViewHolder {
         TextView textViewEnunciat;
+        EditText editTextEnunciat;
         RecyclerView recyclerViewRespuestas;
         Button buttonEditar;
         Button buttonEliminar;
 
 
+
         public QuestionViewHolder(@NonNull View itemView) {
             super(itemView);
+            editTextEnunciat = itemView.findViewById(R.id.editTextEnunciat);
             textViewEnunciat = itemView.findViewById(R.id.textViewEnunciat);
             recyclerViewRespuestas = itemView.findViewById(R.id.recyclerViewRespuestas);
             buttonEditar = itemView.findViewById(R.id.buttonEditar);
             buttonEliminar = itemView.findViewById(R.id.buttonEliminar);
 
-            buttonEditar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onEditClick(position);
-                        }
+            buttonEditar.setOnClickListener(v -> {
+                if (listener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.onEditClick(position);
                     }
                 }
             });
 
-            buttonEliminar.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null) {
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION) {
-                            listener.onDeleteClick(position);
-                        }
+            buttonEliminar.setOnClickListener(v -> {
+                if (listener != null) {
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        listener.onDeleteClick(position);
                     }
                 }
             });
         }
-
         public void bind(QuestionsResponse.Question question) {
-            textViewEnunciat.setText(question.getEnunciat());
+            Log.d("QuestionViewHolder", "isEditing: " + isEditing);
+
+            if (isEditing) {
+                textViewEnunciat.setVisibility(View.GONE);
+                editTextEnunciat.setVisibility(View.VISIBLE);
+                buttonEditar.setVisibility(View.GONE);
+            } else {
+                textViewEnunciat.setVisibility(View.VISIBLE);
+                editTextEnunciat.setVisibility(View.GONE);
+                buttonEditar.setVisibility(View.VISIBLE);
+            }
 
             // Si la pregunta tiene respuestas, configurar el RecyclerView interno con las respuestas
             if (question.getRespostes() != null) {
