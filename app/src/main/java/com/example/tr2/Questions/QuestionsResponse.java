@@ -21,6 +21,7 @@ public class QuestionsResponse {
         @SerializedName("respostes")
         private List<Answer> respostes;
 
+
         public int getId() {
             return id;
         }
